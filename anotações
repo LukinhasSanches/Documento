@@ -1,0 +1,70 @@
+A sintaxe básica é: $ ( seletor ). ação () :
+    * Um sinal de $ para definir / acessar o jQuery
+    * Um ( seletor ) para "consultar (ou localizar)" elementos HTML
+    * Uma ação jQuery () a ser executada no (s) elemento (s)
+
+Exemplos:
+    --> $(this).hide() - oculta o elemento atual.
+
+    --> $("p").hide() - oculta todos os elementos <p>.
+
+    --> $(".test").hide() - oculta todos os elementos com class = "test".
+
+    --> $("#test").hide() - oculta o elemento com id = "test".
+
+Pensando em utilizar REST, para:
+
+    * Protocolo de transferencia amplamente utilizado - HTTP 
+    * Escabilidade - WEB CACHE
+    * Performace alta - WEB PROXY
+    * Alta disponibilidade - LOAD BALANCERS "COMODITIZADOS"
+    * Permitir evolucção sem parar o sistema - LOAD BALANCER
+    * Permitir a evolução sem quebrar os clientes - HTML,JSON,XML 
+    * Segurança - HTTPS/TLS
+
+Lembrando: REST é um padrão de arquitetura de serviços web, 
+basicamente como uma boa parte da web funciona. Ele é pautado no HTTP para 
+acrescentar o mínimo possível de burocracia. Assim, usamos URIs para identificar 
+recursos (e seus caminhos e relacionamentos), um código de status mais um conjunto 
+de headers HTTP e um corpo para fazermos todas as operações que precisamos
+
+---------------------------------------------------------------------------------------------
+
+Firebase:
+
+* A função ref(), faz a referência ao root do banco de dados. 
+
+* Já a child(‘text’), cria um objeto, um child key no root.
+
+* O on(), faz justamente essa sincronização. 
+
+* O primeiro parâmetro passado é o tipo do evento. Usarei ‘value’, 
+    pois queremos saber de qualquer alteração do dado. 
+
+* O snap, é basicamente um snapshot do banco de dados daquele child referenciado. 
+    Esse snap, sempre terá o dado que atualizaremos no nosso elemento 
+
+
+Exemplo de uma tabela configurada no BD Firebase:
+-------------------------------------------------------------------------------------------------------------
+    firebase.initializeApp(config);
+    const texto = document.getElementById('texto');
+    const texto = firebase.database().ref().child('texto');
+    texto.on('value', snap => texto.innerText = snap.val());
+  
+    var table = document.querySelector('#table1 tbody');
+    const dbupdateRef = firebase.database().ref().child('update');
+    dbupdateRef.on('value', snap => {
+      while(table.hasChildNodes()) {
+              table.removeChild(table.firstChild);
+        }
+  
+      var students = snap.val();
+      for(var i in students) {
+        var row = table.insertRow(-1);
+        for(var j in students[i]) {
+                  cell = row.insertCell(-1);
+                  cell.innerHTML = students[i][j];
+              }
+          }
+------------------------------------------------------------------------------------------------------------
